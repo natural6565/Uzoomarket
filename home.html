@@ -1,35 +1,203 @@
 <html>
-    <head>
-        <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+  <head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-    <body>
-<h1>상품별 인기순</h1>
-<div class="frame">
-    <table style="border:1px solid;"><tbody><tr><td>
-        <div id="motioncontainer" style="position:relative;width:170px;height:25px;overflow:hidden;" border="0">
-        <div id="motiongallery" style="position: absolute; left: 0px; top: 0px; white-space: nowrap;">
-        <nobr>
-            <a href="#"><btn1></a>
-                <a href="#"><btn2></a>
-                <a href="#"><btn3></a>
-                <a href="#"><btn4></a>
-                <a href="#"><btn5></a>
-                <a href="#"><btn6></a>
-                <a href="#"><btn7></a>
-                <a href="#"><btn8></a>
-    <button class="btn1">분류1</button>
-    <button class="btn2">분류2</button>
-    <button class="btn3">분류3</button>
-    <button class="btn4">분류4</button>
-    <button class="btn5">분류5</button>
-    <button class="btn6">분류6</button>
-    <button class="btn7">분류7</button>
-    <button class="btn8">분류8</button>
-        </nobr>
-        </div>
-        </div> 
-        </td></tr></tbody></table>
-    </body>
+  <body>
+    <div class="logo">Uzoomarket</div>
+    <div class="img_container"><img src="sample.gif" alt="Sample" width="1100px" height="350px"/></div>
+    <div class="login_container">
+        <form name="fo" method="get">
+        <label for="id">회원 ID :</label><br>
+        <input id="id" type="id" size="15" value=""><br>
+        <label for="pw">비밀번호 : </label><br>
+        <input id="pass" type="password" size="15" value=""><br>
+        <input type="submit" value="완료">
+    </form></div>
+    
+    <div class="frame">
+      <table style="border: 1px solid;">
+        <tbody>
+          <tr>
+            <td>
+              <div
+                id="motioncontainer"
+                style="
+                  position: relative;
+                  width: 272.3px;
+                  height: 25px;
+                  overflow: hidden;
+                  border: 1px;
+                "
+              >
+                <div
+                  id="motiongallery"
+                  style="
+                    position: absolute;
+                    left: 0px;
+                    top: 0px;
+                    white-space: nowrap;
+                  "
+                >
+                  <a href="#"><button class="btn1">분류1</button></a>
+                  <a href="#"><button class="btn2">분류2</button></a>
+                  <a href="#"><button class="btn3">분류3</button></a>
+                  <a href="#"><button class="btn4">분류4</button></a>
+                  <a href="#"><button class="btn5">분류5</button></a>
+                  <a href="#"><button class="btn6">분류6</button></a>
+                  <a href="#"><button class="btn7">분류7</button></a>
+                  <a href="#"><button class="btn8">분류8</button></a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <table>
+        <tr>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+        </tr>
+        <tr>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+            <td><img src="sample.gif" width="125px" height="125px"><div>1</div></td>
+        </tr>
+        </table>
+    </table>
+    <script type="text/javascript">
+      var restarea = 6; //width of the "neutral" area in the center of the gallery in px
+      var maxspeed = 7; //top scroll speed in pixels. Script auto creates a range from 0 to top speed.
+
+      var iedom = document.all || document.getElementById;
+      var scrollspeed = 0;
+      var movestate = "";
+
+      if (iedom)
+        document.write(
+          '<span id="temp" style="visibility:hidden;position:absolute;top:-100;left:-10000;"></span>'
+        );
+
+      var actualwidth = "";
+      var cross_scroll, ns_scroll;
+      var loadedyes = 0;
+
+      function ietruebody() {
+        return document.compatMode && document.compatMode != "BackCompat"
+          ? document.documentElement
+          : document.body;
+      }
+
+      function getposOffset(what, offsettype) {
+        var totaloffset =
+          offsettype == "left" ? what.offsetLeft : what.offsetTop;
+        var parentEl = what.offsetParent;
+        while (parentEl != null) {
+          totaloffset =
+            offsettype == "left"
+              ? totaloffset + parentEl.offsetLeft
+              : totaloffset + parentEl.offsetTop;
+          parentEl = parentEl.offsetParent;
+        }
+        return totaloffset;
+      }
+
+      function moveleft() {
+        if (loadedyes) {
+          movestate = "left";
+          if (
+            iedom &&
+            parseInt(cross_scroll.style.left) > menuwidth - actualwidth
+          )
+            cross_scroll.style.left =
+              parseInt(cross_scroll.style.left) - scrollspeed + "px";
+        }
+        lefttime = setTimeout("moveleft()", 10);
+      }
+
+      function moveright() {
+        if (loadedyes) {
+          movestate = "right";
+          if (iedom && parseInt(cross_scroll.style.left) < 0)
+            cross_scroll.style.left =
+              parseInt(cross_scroll.style.left) + scrollspeed + "px";
+        }
+        righttime = setTimeout("moveright()", 10);
+      }
+
+      function motionengine(e) {
+        var dsocx = window.pageXOffset ? pageXOffset : ietruebody().scrollLeft;
+        var dsocy = window.pageYOffset ? pageYOffset : ietruebody().scrollTop;
+        var curposy = window.event ? event.clientX : e.clientX ? e.clientX : "";
+        curposy -= mainobjoffset - dsocx;
+        var leftbound = (menuwidth - restarea) / 2;
+        var rightbound = (menuwidth + restarea) / 2;
+        if (curposy > rightbound) {
+          scrollspeed =
+            ((curposy - rightbound) / ((menuwidth - restarea) / 2)) * maxspeed;
+          if (window.righttime) clearTimeout(righttime);
+          if (movestate != "left") moveleft();
+        } else if (curposy < leftbound) {
+          scrollspeed =
+            ((leftbound - curposy) / ((menuwidth - restarea) / 2)) * maxspeed;
+          if (window.lefttime) clearTimeout(lefttime);
+          if (movestate != "right") moveright();
+        } else scrollspeed = 0;
+      }
+
+      function contains_ns6(a, b) {
+        while (b.parentNode) if ((b = b.parentNode) == a) return true;
+        return false;
+      }
+
+      function stopmotion(e) {
+        if (
+          (window.event && !crossmain.contains(event.toElement)) ||
+          (e &&
+            e.currentTarget &&
+            e.currentTarget != e.relatedTarget &&
+            !contains_ns6(e.currentTarget, e.relatedTarget))
+        ) {
+          if (window.lefttime) clearTimeout(lefttime);
+          if (window.righttime) clearTimeout(righttime);
+          movestate = "";
+        }
+      }
+
+      function fillup() {
+        if (iedom) {
+          crossmain = document.getElementById
+            ? document.getElementById("motioncontainer")
+            : document.all.motioncontainer;
+          menuwidth = parseInt(crossmain.style.width);
+          mainobjoffset = getposOffset(crossmain, "left");
+          cross_scroll = document.getElementById
+            ? document.getElementById("motiongallery")
+            : document.all.motiongallery;
+          document.getElementById("temp").innerHTML = cross_scroll.innerHTML; //NEW stuff
+          actualwidth = document.all
+            ? cross_scroll.offsetWidth
+            : document.getElementById("temp").offsetWidth;
+          if (!window.opera)
+            document.getElementById("temp").style.display = "none";
+          crossmain.onmousemove = function (e) {
+            motionengine(e);
+          };
+
+          crossmain.onmouseout = function (e) {
+            stopmotion(e);
+          };
+        }
+        loadedyes = 1;
+      }
+      window.onload = fillup;
+    </script>
+  </body>
 </html>
